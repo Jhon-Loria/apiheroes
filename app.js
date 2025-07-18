@@ -26,6 +26,10 @@ const swaggerDefinition = {
     {
       url: 'http://localhost:3001',
       description: 'Servidor local'
+    },
+    {
+      url: 'https://apiheroes-production.up.railway.app',
+      description: 'Servidor en Railway'
     }
   ],
   components: {
@@ -71,7 +75,7 @@ app.use('/api', allController);
 app.use('/api', petGameController);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get('/', (req, res) => {
-  res.send('¡API corriendo en Railway! Visita /api-docs para ver Swagger.');
+  res.redirect('/api-docs');
 });
 
 
