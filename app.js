@@ -24,10 +24,6 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: 'http://localhost:3001',
-      description: 'Servidor local'
-    },
-    {
       url: 'https://apiheroes-production.up.railway.app',
       description: 'Servidor en Railway'
     }
