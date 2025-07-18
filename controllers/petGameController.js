@@ -362,13 +362,16 @@ router.put('/mascotas/:id/vestir', auth, [
     if (!pet) {
       return res.status(404).json({ error: 'Mascota no encontrada o no autorizada' });
     }
-    
-    const resultado = pet.vestir(req.body.item);
-    await petService.updatePet(pet.id, pet);
-    
+
+    // Asegúrate de que el campo itemsCustom exista y sea un array
+    if (!pet.itemsCustom) pet.itemsCustom = [];
+    pet.itemsCustom.push(req.body.item);
+    await pet.save();
+
     res.json({
-      ...resultado,
-      estado: pet.obtenerEstado()
+      success: true,
+      message: `Item ${req.body.item} agregado a la mascota`,
+      mascota: pet
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
