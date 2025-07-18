@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 
 import heroController from './controllers/heroController.js';
@@ -52,7 +53,7 @@ const swaggerSpec = swaggerJSDoc(options);
 
 const app = express();
 
-
+app.use(cors());
 app.use(express.json());
 
 // Conexión a MongoDB Atlas
@@ -69,9 +70,12 @@ app.use('/api', adoptionController);
 app.use('/api', allController);
 app.use('/api', petGameController);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get('/', (req, res) => {
+  res.send('¡API corriendo en Railway! Visita /api-docs para ver Swagger.');
+});
 
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
