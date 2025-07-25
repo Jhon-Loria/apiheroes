@@ -28,6 +28,13 @@ petSchema.methods.jugar = function() {
   return this.save();
 };
 
+petSchema.methods.curar = function() {
+  // Ejemplo de lógica: cura a la mascota (puedes ajustar según tu lógica)
+  this.enfermedad = null; // Suponiendo que tienes un campo 'enfermedad'
+  this.felicidad = Math.min((this.felicidad || 0) + 5, 100); // Curar da un poco de felicidad
+  return this.save();
+};
+
 petSchema.methods.obtenerEstado = function() {
   // Devuelve el estado actual de la mascota
   return {
