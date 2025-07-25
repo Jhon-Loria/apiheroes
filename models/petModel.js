@@ -35,6 +35,12 @@ petSchema.methods.curar = function() {
   return this.save();
 };
 
+petSchema.methods.enfermar = function(enfermedad) {
+  // Marca a la mascota como enferma
+  this.enfermedad = enfermedad || "Desconocida";
+  return this.save();
+};
+
 petSchema.methods.obtenerEstado = function() {
   // Devuelve el estado actual de la mascota
   return {
