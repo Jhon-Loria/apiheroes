@@ -53,6 +53,11 @@ const swaggerSpec = swaggerJSDoc(options);
 
 const app = express();
 
+app.get('/swagger.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
+
 app.use(cors());
 app.use(express.json());
 

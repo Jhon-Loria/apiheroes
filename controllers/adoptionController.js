@@ -1,6 +1,7 @@
 import express from 'express';
 import Adoption from '../models/adoptionModel.js';
 import Counter from '../models/counterModel.js';
+import auth from '../middleware/auth.js';
 const router = express.Router();
 
 /**
@@ -83,7 +84,7 @@ const router = express.Router();
  *         description: Adopción no encontrada
  */
 // Obtener todas las adopciones del usuario autenticado
-router.get('/adoptions', async (req, res) => {
+router.get('/adoptions', auth, async (req, res) => {
   try {
     const adoptions = await Adoption.find().populate('mascota heroe');
     res.json(adoptions);
@@ -93,7 +94,7 @@ router.get('/adoptions', async (req, res) => {
 });
 
 // Crear una adopción para el usuario autenticado
-router.post('/adoptions', async (req, res) => {
+router.post('/adoptions', auth, async (req, res) => {
   try {
     const { mascota, heroe } = req.body;
     // Obtener el siguiente id
@@ -111,7 +112,7 @@ router.post('/adoptions', async (req, res) => {
 });
 
 // Actualizar una adopción del usuario autenticado
-router.put('/adoptions/:id', async (req, res) => {
+router.put('/adoptions/:id', auth, async (req, res) => {
   try {
     const { mascota, heroe } = req.body;
     const adoption = await Adoption.findOneAndUpdate(
@@ -129,7 +130,7 @@ router.put('/adoptions/:id', async (req, res) => {
 });
 
 // Eliminar una adopción del usuario autenticado
-router.delete('/adoptions/:id', async (req, res) => {
+router.delete('/adoptions/:id', auth, async (req, res) => {
   try {
     const adoption = await Adoption.findOneAndDelete({ _id: req.params.id, usuario: req.user._id });
     if (!adoption) {
