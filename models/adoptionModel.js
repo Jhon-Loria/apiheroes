@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const adoptionSchema = new mongoose.Schema({
   _id: { type: Number },
-  usuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  usuario: { type: Number, ref: 'User', required: true },
   mascota: { type: Number, ref: 'Pet', required: true },
   heroe: { type: Number, ref: 'Hero', required: true },
   fecha: { type: Date, default: Date.now },
