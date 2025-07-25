@@ -19,5 +19,19 @@ petSchema.methods.pasear = function() {
   return this.save();
 };
 
+petSchema.methods.obtenerEstado = function() {
+  // Devuelve el estado actual de la mascota
+  return {
+    _id: this._id,
+    nombre: this.nombre,
+    tipo: this.tipo,
+    edad: this.edad,
+    usuario: this.usuario,
+    felicidad: this.felicidad,
+    hambre: this.hambre
+    // Agrega aquí otros campos que quieras mostrar
+  };
+};
+
 const Pet = mongoose.model('Pet', petSchema);
 export default Pet;
