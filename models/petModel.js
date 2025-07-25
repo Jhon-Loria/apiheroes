@@ -19,6 +19,15 @@ petSchema.methods.pasear = function() {
   return this.save();
 };
 
+petSchema.methods.jugar = function() {
+  // Ejemplo de lógica: aumenta felicidad y hambre
+  if (typeof this.felicidad !== 'number') this.felicidad = 0;
+  if (typeof this.hambre !== 'number') this.hambre = 0;
+  this.felicidad = Math.min(this.felicidad + 15, 100); // Jugar da más felicidad
+  this.hambre = Math.min(this.hambre + 10, 100);       // Jugar da más hambre
+  return this.save();
+};
+
 petSchema.methods.obtenerEstado = function() {
   // Devuelve el estado actual de la mascota
   return {
